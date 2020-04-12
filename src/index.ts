@@ -11,11 +11,14 @@ const textBlockRouter = require('./routes/textBlockRouter');
 const userRouter = require('./routes/userRouter');
 
 const app = express();
-const apiPort = 3000;
-const apiRoot = '/api';
-const locale = {
-    en: '/en',
-    ru: '/ru'
+
+const apiConfig = {
+    apiPort: 8090,
+    apiRoot: '/api',
+    locale: {
+        en: '/en',
+        ru: '/ru'
+    }
 };
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,10 +31,10 @@ app.get('/', (_req: Request, res: Response) => {
     res.send('Connection successfull. Homesite server is online.');
 });
 
-app.use(`${apiRoot}${locale.en}/article`, articleRouter);
-app.use(`${apiRoot}${locale.en}/project`, projectRouter);
-app.use(`${apiRoot}${locale.en}/skill`, skillRouter);
-app.use(`${apiRoot}${locale.en}/year`, textBlockRouter);
-app.use(`${apiRoot}${locale.en}/users`, userRouter);
+app.use(`${apiConfig.apiRoot}${apiConfig.locale.en}/article`, articleRouter);
+app.use(`${apiConfig.apiRoot}${apiConfig.locale.en}/project`, projectRouter);
+app.use(`${apiConfig.apiRoot}${apiConfig.locale.en}/skill`, skillRouter);
+app.use(`${apiConfig.apiRoot}${apiConfig.locale.en}/year`, textBlockRouter);
+app.use(`${apiConfig.apiRoot}${apiConfig.locale.en}/users`, userRouter);
 
-app.listen(apiPort, () => console.log(`Server running on port ${apiPort}`));
+app.listen(apiConfig.apiPort, () => console.log(`Server running on port ${apiConfig.apiPort}`));

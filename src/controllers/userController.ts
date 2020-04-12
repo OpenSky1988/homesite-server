@@ -30,6 +30,8 @@ const registerUser = (req: Request, res: Response) => {
             return res.status(201).json({
                 success: true,
                 id: user._id,
+                email: user.email,
+                password: user.password,
                 message: 'User created!',
             });
         })
