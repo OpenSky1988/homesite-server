@@ -144,6 +144,7 @@ const getUsers = async (req: Request, res: Response) => {
 
 const authenticateUser = (req: Request, res: Response) => {
     const { email, password } = req.body;
+    const tokenDuration = '1h';
     
     userModel.findOne({ email }, function(error: Error, user) {
         if (error) {
@@ -171,21 +172,30 @@ const authenticateUser = (req: Request, res: Response) => {
                 // Issue token
                 const payload = { email };
                 const token = jwt.sign(payload, process.env.SECRET, {
-                    expiresIn: '1h'
+                    expiresIn: tokenDuration
                 });
-                res.cookie('token', token, { httpOnly: true })
-                    .sendStatus(200);
+                res.cookie('token', token, { httpOnly: true }).sendStatus(200);
             }
         });
     }});
   return -1;
 };
 
+const checkToken = (_req, res) => {
+    res.sendStatus(200);
+};
+
+const secret = (_req, res) => {
+    res.send('The password is potato');
+};
+
 module.exports = {
-    registerUser,
-    udateUser,
+    authenticateUser,
+    checkToken,
     deleteUser,
     getUserById,
     getUsers,
-    authenticateUser
+    registerUser,
+    secret,
+    udateUser
 };

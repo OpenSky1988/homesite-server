@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
+require('dotenv').config();
 
 const MongoDB = require('./db');
 const articleRouter = require('./routes/blogArticleRouter');
@@ -24,6 +26,7 @@ const apiConfig = {
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 MongoDB.on('error', console.error.bind(console, 'MongoDB connection error'));
 
