@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import stringifyObject from '../helpers/stringifyObject';
 import { ArticleType, IArticle } from '../models/blogArticleModel';
 import articleModel from '../models/blogArticleModel';
 
@@ -35,7 +36,7 @@ const createArticle = (req: Request, res: Response) => {
         .catch((error: Error) => {
             return res.status(400).json({
                 error,
-                message: `Article not created!\nError: ${JSON.stringify(error, null, '  ')}`,
+                message: `Article not created!\nError: ${stringifyObject(error)}`,
             });
         });
 
@@ -82,7 +83,7 @@ const udateArticle = async (req: Request, res: Response) => {
             .catch((error: Error) => {
                 return res.status(400).json({
                     error,
-                    message: `Article not updated!\nError: ${JSON.stringify(error, null, '  ')}`,
+                    message: `Article not updated!\nError: ${stringifyObject(error)}`,
                 });
             });
 
@@ -111,7 +112,7 @@ const deleteArticle = async (req: Request, res: Response) => {
         }
 
         return res.status(200).json({ success: true, data: article });
-    }).catch((error: Error) => console.log(`Unable to delete article. Error: ${JSON.stringify(error, null, '  ')}`));
+    }).catch((error: Error) => console.log(`Unable to delete article. Error: ${stringifyObject(error)}`));
 };
 
 const getArticleById = async (req: Request, res: Response) => {
@@ -125,7 +126,7 @@ const getArticleById = async (req: Request, res: Response) => {
         }
 
         return res.status(200).json({ success: true, data: article });
-    }).catch((error: Error) => console.log(`Unable to fetch article. Error: ${JSON.stringify(error, null, '  ')}`));
+    }).catch((error: Error) => console.log(`Unable to fetch article. Error: ${stringifyObject(error)}`));
 };
 
 const getArticles = async (req: Request, res: Response) => {
@@ -139,7 +140,7 @@ const getArticles = async (req: Request, res: Response) => {
         }
 
         return res.status(200).json({ success: true, data: articles });
-    }).catch((error: Error) => console.log(`Unable to fetch articles. Error: ${JSON.stringify(error, null, '  ')}`));
+    }).catch((error: Error) => console.log(`Unable to fetch articles. Error: ${stringifyObject(error)}`));
 };
 
 export {

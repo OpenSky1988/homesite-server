@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import stringifyObject from '../helpers/stringifyObject';
 import {IProject, ProjectType } from '../models/projectModel';
 import projectModel from '../models/projectModel';
 
@@ -35,7 +36,7 @@ const createProject = (req: Request, res: Response) => {
         .catch((error: Error) => {
             return res.status(400).json({
                 error,
-                message: `Project not created!\nError: ${JSON.stringify(error, null, '  ')}`,
+                message: `Project not created!\nError: ${stringifyObject(error)}`,
             });
         });
 
@@ -83,7 +84,7 @@ const udateProject = async (req: Request, res: Response) => {
             .catch((error: Error) => {
                 return res.status(400).json({
                     error,
-                    message: `Project not updated!\nError: ${JSON.stringify(error, null, '  ')}`,
+                    message: `Project not updated!\nError: ${stringifyObject(error)}`,
                 });
             });
 
@@ -112,7 +113,7 @@ const deleteProject = async (req: Request, res: Response) => {
         }
 
         return res.status(200).json({ success: true, data: project });
-    }).catch((error: Error) => console.log(`Unable to delete project. Error: ${JSON.stringify(error, null, '  ')}`));
+    }).catch((error: Error) => console.log(`Unable to delete project. Error: ${stringifyObject(error)}`));
 };
 
 const getProjectById = async (req: Request, res: Response) => {
@@ -126,10 +127,10 @@ const getProjectById = async (req: Request, res: Response) => {
         }
 
         return res.status(200).json({ success: true, data: project });
-    }).catch((error: Error) => console.log(`Unable to fetch project. Error: ${JSON.stringify(error, null, '  ')}`));
+    }).catch((error: Error) => console.log(`Unable to fetch project. Error: ${stringifyObject(error)}`));
 };
 
-const getProjects = async (req: Request, res: Response) => {
+const getProjects = async (_req: Request, res: Response) => {
     await projectModel.find({}, (error: Error, projects: IProject) => {
         if (error) {
             return res.status(400).json({ success: false, error: error });
@@ -140,7 +141,7 @@ const getProjects = async (req: Request, res: Response) => {
         }
 
         return res.status(200).json({ success: true, data: projects });
-    }).catch((error: Error) => console.log(`Unable to fetch projects. Error: ${JSON.stringify(error, null, '  ')}`));
+    }).catch((error: Error) => console.log(`Unable to fetch projects. Error: ${stringifyObject(error)}`));
 };
 
 export {
