@@ -1,6 +1,5 @@
-export {};
-const express = require('express');
-const skillController = require('../controllers/skillController');
+import express from 'express';
+import * as skillController from '../controllers/skillController';
 
 const skillRouter = express.Router();
 
@@ -10,4 +9,4 @@ skillRouter.put('/:id', skillController.udateSkill);
 skillRouter.delete('/:id', skillController.deleteSkill);
 skillRouter.get('/:id', skillController.getSkillById);
 
-module.exports = skillRouter;
+export default skillRouter;

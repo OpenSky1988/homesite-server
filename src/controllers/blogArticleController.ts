@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { ArticleType, IArticle } from '../models/blogArticleModel';
-const articleModel = require('../models/blogArticleModel');
+import articleModel from '../models/blogArticleModel';
 
 type ArticleSchemaType = IArticle & { save(): any; };
 
@@ -142,7 +142,7 @@ const getArticles = async (req: Request, res: Response) => {
     }).catch((error: Error) => console.log(`Unable to fetch articles. Error: ${JSON.stringify(error, null, '  ')}`));
 };
 
-module.exports = {
+export {
     createArticle,
     udateArticle,
     deleteArticle,

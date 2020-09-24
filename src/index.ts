@@ -1,14 +1,15 @@
 import { Request, Response } from 'express';
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+require('dotenv').config();
 
-const MongoDB = require('./db');
-const articleRouter = require('./routes/blogArticleRouter');
-const projectRouter = require('./routes/projectRouter');
-const skillRouter = require('./routes/skillRouter');
-const textBlockRouter = require('./routes/textBlockRouter');
-const userRouter = require('./routes/userRouter');
+import MongoDB from './db';
+import articleRouter from './routes/blogArticleRouter';
+import projectRouter from './routes/projectRouter';
+import skillRouter from './routes/skillRouter';
+import textBlockRouter from './routes/textBlockRouter';
+import userRouter from './routes/userRouter';
 
 const app = express();
 

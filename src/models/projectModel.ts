@@ -1,5 +1,5 @@
 import { Document, Schema } from 'mongoose';
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 interface IProject {
     _id: number;
@@ -27,4 +27,4 @@ const ProjectSchema = new Schema({
 const projectModel = mongoose.model('Project', ProjectSchema);
 
 export { IProject, ProjectType };
-module.exports = projectModel;
+export default projectModel;

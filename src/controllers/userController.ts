@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
-import {IUser, UserType } from '../models/userModel';
-const userModel = require('../models/userModel');
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
+import respondWithError from '../helpers/respondWithError';
+import saveToDB from '../helpers/saveToDB';
 
 type UserSchemaType = IUser & { save(): any; };
 
@@ -181,11 +181,11 @@ const authenticateUser = (req: Request, res: Response) => {
   return -1;
 };
 
-module.exports = {
-    registerUser,
-    udateUser,
+export {
+    authenticateUser,
     deleteUser,
     getUserById,
     getUsers,
-    authenticateUser
+    registerUser,
+    udateUser,
 };
