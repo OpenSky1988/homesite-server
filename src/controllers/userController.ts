@@ -1,96 +1,71 @@
 import { Request, Response } from 'express';
 import jwt from 'jsonwebtoken';
+import respondWithError from '../helpers/respondWithError';
+import saveToDB from '../helpers/saveToDB';
+import stringifyObject from '../helpers/stringifyObject';
 import userModel, { IUser, UserType } from '../models/userModel';
 
 type UserSchemaType = IUser & { save(): any; };
 
 const registerUser = (req: Request, res: Response) => {
-    const body = req.body;
-
+    const { body } = req;
+    
     if (!body) {
-        return res.status(400).json({
-            success: false,
-            error: 'You must provide a user.',
-        });
+        return respondWithError(res, 'You must provide a user.');
     }
 
     const user = new userModel(body);
 
     if (!user) {
-        return res.status(400).json({
-            success: false,
-            error: 'Wrong user data.',
-        });
+        return respondWithError(res, 'Wrong user data.');
     }
     
-    user
-        .save()
-        .then(() => {
-            return res.status(201).json({
-                success: true,
-                id: user._id,
-                email: user.email,
-                password: user.password,
-                message: 'User created!',
-            });
-        })
-        .catch((error: Error) => {
-            return res.status(400).json({
-                error,
-                message: `User not created!\nError: ${JSON.stringify(error, null, '  ')}`,
-            });
-        });
+    // Check by email if user is registered
 
-    // return res.status(400).json({
-    //     success: false,
-    //     message: 'User not created!',
-    // });
-    return -1;
+    return saveToDB(res, user, {
+        active: true,
+        email: user.email,
+        id: user._id,
+        message: 'User created!',
+        password: user.password,
+        success: true,
+    },
+    'User not created!');
 };
 
 const udateUser = async (req: Request, res: Response) => {
     const body = req.body;
 
     if (!body) {
-        return res.status(400).json({
-            success: false,
-            error: 'You must provide a body to update',
-        });
+        return respondWithError(res, 'You must provide a body to update');
     }
     
     userModel.findOne({ _id: req.params.id }, (error: Error, user: UserSchemaType) => {
         if (error) {
-            return res.status(400).json({
-                error,
-                message: 'User not found',
-            })
+            return respondWithError(res, 'User not found');
         }
 
-        user.email = body.email;
-        user.password = body.email;
+        const { email, password, active } = body;
         
-        user
-            .save()
-            .then(() => {
-                return res.status(200).json({
-                    success: true,
-                    id: user._id,
-                    message: 'User updated!',
-                });
-            })
-            .catch((error: Error) => {
-                return res.status(400).json({
-                    error,
-                    message: `User not updated!\nError: ${JSON.stringify(error, null, '  ')}`,
-                });
-            });
+        if (email) {
+            user.email = email;
+        }
 
-            // return res.status(400).json({
-            //     success: false,
-            //     message: 'User not updated!',
-            // });
-            return -1;
-        });
+        if (password) {
+            user.password = password;
+        }
+
+        if (active) {
+            user.active = active;
+        }
+
+        return saveToDB(res, user, {
+            success: true,
+            id: user._id,
+            message: 'User updated!',
+        },
+        'User not updated!');
+    });
     
     // return res.status(400).json({
     //     success: false,
@@ -102,7 +77,7 @@ const udateUser = async (req: Request, res: Response) => {
 const deleteUser = async (req: Request, res: Response) => {
     await userModel.findOneAndDelete({ _id: req.params.id }, (error: Error, user: UserType) => {
         if (error) {
-            return res.status(400).json({ success: false, error: error });
+            return respondWithError(res, stringifyObject(error));
         }
 
         if (!user) {
@@ -110,73 +85,74 @@ const deleteUser = async (req: Request, res: Response) => {
         }
 
         return res.status(200).json({ success: true, data: user });
-    }).catch((error: Error) => console.log(`Unable to delete user. Error: ${JSON.stringify(error, null, '  ')}`));
+    }).catch((error: Error) => console.log(`Unable to delete user. Error: ${stringifyObject(error)}`));
 };
 
 const getUserById = async (req: Request, res: Response) => {
     await userModel.findOne({ _id: req.params.id }, (error: Error, user: IUser) => {
         if (error) {
-            return res.status(400).json({ success: false, error: error });
+            return respondWithError(res, stringifyObject(error));
         }
 
         if (!user) {
-            return res.status(400).json({ success: false, error: 'User not found.' });
+            return respondWithError(res, 'User not found.');
         }
 
         return res.status(200).json({ success: true, data: user });
-    }).catch((error: Error) => console.log(`Unable to fetch user. Error: ${JSON.stringify(error, null, '  ')}`));
+    }).catch((error: Error) => console.log(`Unable to fetch user. Error: ${stringifyObject(error)}`));
 };
 
-const getUsers = async (req: Request, res: Response) => {
+const getUsers = async (_req: Request, res: Response) => {
     await userModel.find({}, (error: Error, users: IUser) => {
         if (error) {
-            return res.status(400).json({ success: false, error: error });
+            return respondWithError(res, stringifyObject(error));
         }
 
         if (!users) {
-            return res.status(400).json({ success: false, error: 'Users not found.' });
+            return respondWithError(res, 'Users not found.');
         }
 
         return res.status(200).json({ success: true, data: users });
-    }).catch((error: Error) => console.log(`Unable to fetch users. Error: ${JSON.stringify(error, null, '  ')}`));
+    }).catch((error: Error) => console.log(`Unable to fetch users. Error: ${stringifyObject(error)}`));
 };
 
 const authenticateUser = (req: Request, res: Response) => {
     const { email, password } = req.body;
-    const tokenDuration = '1h';
     
     userModel.findOne({ email }, function(error: Error, user) {
         if (error) {
-        console.error(error);
-        res.status(500)
-            .json({
-            error: 'Internal error please try again'
-        });
-    } else if (!user) {
-        res.status(401)
-            .json({
-                error: 'Incorrect email or password'
+            console.error(error);
+            res.status(500)
+                .json({
+                error: 'Internal error. Please try again'
             });
-    } else {
-        user.isCorrectPassword(password, function(error: Error, same: Boolean) {
-            if (error) {
-                res.status(500).json({
-                    error: 'Internal error please try again'
-                });
-            } else if (!same) {
-                res.status(401).json({
+        } else if (!user) {
+            res.status(401)
+                .json({
                     error: 'Incorrect email or password'
                 });
-            } else {
-                // Issue token
-                const payload = { email };
-                const token = jwt.sign(payload, process.env.SECRET, {
-                    expiresIn: tokenDuration
-                });
-                res.cookie('token', token, { httpOnly: true }).sendStatus(200);
-            }
-        });
-    }});
+        } else {
+            user.isCorrectPassword(password, function(error: Error, same: Boolean) {
+                if (error) {
+                    res.status(500).json({
+                        error: 'Internal error please try again'
+                    });
+                } else if (!same) {
+                    res.status(401).json({
+                        error: 'Incorrect email or password'
+                    });
+                } else {
+                    // Issue token
+                    const payload = { email };
+                    const token = jwt.sign(payload, process.env.SECRET, {
+                        expiresIn: '1h'
+                    });
+                    res.cookie('token', token, { httpOnly: true })
+                        .sendStatus(200);
+                }
+            });
+        }
+    });
   return -1;
 };
 

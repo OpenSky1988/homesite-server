@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import stringifyObject from '../helpers/stringifyObject';
 import {ITextBlock, TextBlockType } from '../models/textBlockModel';
 import textBlockModel from '../models/textBlockModel';
 
@@ -35,7 +36,7 @@ const createTextBlock = (req: Request, res: Response) => {
         .catch((error: Error) => {
             return res.status(400).json({
                 error,
-                message: `TextBlock not created!\nError: ${JSON.stringify(error, null, '  ')}`,
+                message: `TextBlock not created!\nError: ${stringifyObject(error)}`,
             });
         });
 
@@ -78,7 +79,7 @@ const udateTextBlock = async (req: Request, res: Response) => {
             .catch((error: Error) => {
                 return res.status(400).json({
                     error,
-                    message: `Text block not updated!\nError: ${JSON.stringify(error, null, '  ')}`,
+                    message: `Text block not updated!\nError: ${stringifyObject(error)}`,
                 });
             });
 
@@ -107,7 +108,7 @@ const deleteTextBlock = async (req: Request, res: Response) => {
         }
 
         return res.status(200).json({ success: true, data: textblock });
-    }).catch((error: Error) => console.log(`Unable to delete textblock. Error: ${JSON.stringify(error, null, '  ')}`));
+    }).catch((error: Error) => console.log(`Unable to delete textblock. Error: ${stringifyObject(error)}`));
 };
 
 const getTextBlockById = async (req: Request, res: Response) => {
@@ -121,7 +122,7 @@ const getTextBlockById = async (req: Request, res: Response) => {
         }
 
         return res.status(200).json({ success: true, data: textblock });
-    }).catch((error: Error) => console.log(`Unable to fetch text block. Error: ${JSON.stringify(error, null, '  ')}`));
+    }).catch((error: Error) => console.log(`Unable to fetch text block. Error: ${stringifyObject(error)}`));
 };
 
 // const getTextBlocks = async (req: Request, res: Response) => {
@@ -135,7 +136,7 @@ const getTextBlockById = async (req: Request, res: Response) => {
 //         }
 
 //         return res.status(200).json({ success: true, data: textBlocks });
-//     }).catch((error: Error) => console.log(`Unable to fetch text blocks. Error: ${JSON.stringify(error, null, '  ')}`));
+//     }).catch((error: Error) => console.log(`Unable to fetch text blocks. Error: ${stringifyObject(error)}`));
 // };
 
 export {
