@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
-import {ISkill, SkillType } from '../models/skillModel';
-const skillModel = require('../models/skillModel');
+import skillModel, { ISkill, SkillType } from '../models/skillModel';
 
 type SkillSchemaType = ISkill & { save(): any; };
 
@@ -141,7 +140,7 @@ const getSkills = async (req: Request, res: Response) => {
     }).catch((error: Error) => console.log(`Unable to fetch skills. Error: ${JSON.stringify(error, null, '  ')}`));
 };
 
-module.exports = {
+export {
     createSkill,
     udateSkill,
     deleteSkill,

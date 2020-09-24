@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import {IProject, ProjectType } from '../models/projectModel';
-const projectModel = require('../models/projectModel');
+import projectModel from '../models/projectModel';
 
 type ProjectSchemaType = IProject & { save(): any; };
 
@@ -143,7 +143,7 @@ const getProjects = async (req: Request, res: Response) => {
     }).catch((error: Error) => console.log(`Unable to fetch projects. Error: ${JSON.stringify(error, null, '  ')}`));
 };
 
-module.exports = {
+export {
     createProject,
     udateProject,
     deleteProject,
