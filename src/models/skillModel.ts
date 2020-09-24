@@ -1,5 +1,5 @@
 import { Document, Schema } from 'mongoose';
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 interface ISkill {
     _id: Number;
@@ -23,4 +23,4 @@ const SkillSchema = new Schema({
 const skillModel = mongoose.model('SkillModel', SkillSchema);
 
 export { ISkill, SkillType};
-module.exports = skillModel;
+export default skillModel;

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import {ITextBlock, TextBlockType } from '../models/textBlockModel';
-const textBlockModel = require('../models/textBlockModel');
+import textBlockModel from '../models/textBlockModel';
 
 type TextBlockSchemaType = ITextBlock & { save(): any; };
 
@@ -138,7 +138,7 @@ const getTextBlockById = async (req: Request, res: Response) => {
 //     }).catch((error: Error) => console.log(`Unable to fetch text blocks. Error: ${JSON.stringify(error, null, '  ')}`));
 // };
 
-module.exports = {
+export {
     createTextBlock,
     udateTextBlock,
     deleteTextBlock,

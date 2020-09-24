@@ -1,6 +1,5 @@
-export {};
-const express = require('express');
-const blogArticleController = require('../controllers/blogArticleController');
+import express from 'express';
+import * as blogArticleController from '../controllers/blogArticleController';
 
 const blogArticleRouter = express.Router();
 
@@ -10,4 +9,4 @@ blogArticleRouter.put('/:id', blogArticleController.udateArticle);
 blogArticleRouter.delete('/:id', blogArticleController.deleteArticle);
 blogArticleRouter.get('/:id', blogArticleController.getArticleById);
 
-module.exports = blogArticleRouter;
+export default blogArticleRouter;

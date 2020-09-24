@@ -1,6 +1,5 @@
-export {};
-const express = require('express');
-const textBlockController = require('../controllers/textBlockController');
+import express from 'express';
+import * as textBlockController from '../controllers/textBlockController';
 
 const textBlockRouter = express.Router();
 
@@ -10,4 +9,4 @@ textBlockRouter.put('/:id', textBlockController.udateTextBlock);
 textBlockRouter.delete('/:id', textBlockController.deleteTextBlock);
 textBlockRouter.get('/:id', textBlockController.getTextBlockById);
 
-module.exports = textBlockRouter;
+export default textBlockRouter;
