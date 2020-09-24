@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
-import {IUser, UserType } from '../models/userModel';
-const userModel = require('../models/userModel');
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
+import userModel, { IUser, UserType } from '../models/userModel';
 
 type UserSchemaType = IUser & { save(): any; };
 
@@ -181,6 +180,8 @@ const authenticateUser = (req: Request, res: Response) => {
   return -1;
 };
 
+
+
 const checkToken = (_req, res) => {
     res.sendStatus(200);
 };
@@ -189,7 +190,7 @@ const secret = (_req, res) => {
     res.send('The password is potato');
 };
 
-module.exports = {
+export {
     authenticateUser,
     checkToken,
     deleteUser,

@@ -1,5 +1,5 @@
 import { Document, Schema } from 'mongoose';
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 interface IArticle {
   _id: number;
@@ -25,4 +25,4 @@ const BlogArticleSchema = new Schema({
 const articleModel = mongoose.model('BlogArticle', BlogArticleSchema);
 
 export { ArticleType, IArticle };
-module.exports = articleModel;
+export default articleModel;

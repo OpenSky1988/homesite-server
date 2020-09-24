@@ -1,5 +1,5 @@
 import { Document, Schema } from 'mongoose';
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 interface ITextBlock {
     _id: number;
@@ -15,4 +15,4 @@ const TextBlockSchema = new Schema({
 const textBlockModel = mongoose.model('TextBlockModel', TextBlockSchema);
 
 export { ITextBlock, TextBlockType };
-module.exports = textBlockModel;
+export default textBlockModel;

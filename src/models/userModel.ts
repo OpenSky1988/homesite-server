@@ -1,6 +1,6 @@
 import { Document, Schema } from 'mongoose';
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
 
 interface IUser {
     _id: number;
@@ -48,4 +48,4 @@ UserSchema.methods.isCorrectPassword = function (password: String, callback: (er
 const userModel = mongoose.model('UserModel', UserSchema);
 
 export { IUser, UserType };
-module.exports = userModel;
+export default userModel;
