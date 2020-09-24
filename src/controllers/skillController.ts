@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import stringifyObject from '../helpers/stringifyObject';
 import skillModel, { ISkill, SkillType } from '../models/skillModel';
 
 type SkillSchemaType = ISkill & { save(): any; };
@@ -34,7 +35,7 @@ const createSkill = (req: Request, res: Response) => {
         .catch((error: Error) => {
             return res.status(400).json({
                 error,
-                message: `Skill not created!\nError: ${JSON.stringify(error, null, '  ')}`,
+                message: `Skill not created!\nError: ${stringifyObject(error)}`,
             });
         });
 
@@ -80,7 +81,7 @@ const udateSkill = async (req: Request, res: Response) => {
             .catch((error: Error) => {
                 return res.status(400).json({
                     error,
-                    message: `Skill not updated!\nError: ${JSON.stringify(error, null, '  ')}`,
+                    message: `Skill not updated!\nError: ${stringifyObject(error)}`,
                 });
             });
 
@@ -109,7 +110,7 @@ const deleteSkill = async (req: Request, res: Response) => {
         }
 
         return res.status(200).json({ success: true, data: skill });
-    }).catch((error: Error) => console.log(`Unable to delete skill. Error: ${JSON.stringify(error, null, '  ')}`));
+    }).catch((error: Error) => console.log(`Unable to delete skill. Error: ${stringifyObject(error)}`));
 };
 
 const getSkillById = async (req: Request, res: Response) => {
@@ -123,7 +124,7 @@ const getSkillById = async (req: Request, res: Response) => {
         }
 
         return res.status(200).json({ success: true, data: skill });
-    }).catch((error: Error) => console.log(`Unable to fetch skill. Error: ${JSON.stringify(error, null, '  ')}`));
+    }).catch((error: Error) => console.log(`Unable to fetch skill. Error: ${stringifyObject(error)}`));
 };
 
 const getSkills = async (req: Request, res: Response) => {
@@ -137,7 +138,7 @@ const getSkills = async (req: Request, res: Response) => {
         }
 
         return res.status(200).json({ success: true, data: skills });
-    }).catch((error: Error) => console.log(`Unable to fetch skills. Error: ${JSON.stringify(error, null, '  ')}`));
+    }).catch((error: Error) => console.log(`Unable to fetch skills. Error: ${stringifyObject(error)}`));
 };
 
 export {

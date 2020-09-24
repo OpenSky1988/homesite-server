@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 
 interface IUser {
     _id: number;
+    active: boolean;
     email: string;
     password: string;
 };
@@ -13,6 +14,7 @@ const saltRounds = 10;
 type UserType = IUser & Document;
 
 const UserSchema = new Schema({
+    active: { type: Boolean, required: false },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true }
 });
