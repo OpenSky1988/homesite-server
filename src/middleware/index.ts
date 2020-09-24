@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
 const withAuth = (req, res, next) => {
   const token = 
@@ -8,7 +8,7 @@ const withAuth = (req, res, next) => {
       req.cookies.token;
 
   if (!token) {
-    res.status(401).send('Unauthorized: No token provided');
+    res.status(401).send('Unauthorized request');
   } else {
     jwt.verify(token, process.env.SECRET, function(err, decoded) {
       if (err) {
