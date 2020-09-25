@@ -1,12 +1,19 @@
 import express from 'express';
-import * as blogArticleController from '../controllers/blogArticleController';
+import {
+    createArticle,
+    deleteArticle,
+    getArticleById,
+    getArticles,
+    updateArticle,
+} from '../controllers/blogArticleController';
+import withAuth from '../middleware/index';
 
 const blogArticleRouter = express.Router();
 
-blogArticleRouter.post('/', blogArticleController.createArticle);
-blogArticleRouter.get('/list', blogArticleController.getArticles);
-blogArticleRouter.put('/:id', blogArticleController.udateArticle);
-blogArticleRouter.delete('/:id', blogArticleController.deleteArticle);
-blogArticleRouter.get('/:id', blogArticleController.getArticleById);
+blogArticleRouter.post('/', withAuth, createArticle);
+blogArticleRouter.get('/list', withAuth, getArticles);
+blogArticleRouter.put('/:id', withAuth, updateArticle);
+blogArticleRouter.delete('/:id', withAuth, deleteArticle);
+blogArticleRouter.get('/:id', withAuth, getArticleById);
 
 export default blogArticleRouter;

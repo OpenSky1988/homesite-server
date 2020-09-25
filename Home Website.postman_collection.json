@@ -1,0 +1,411 @@
+{
+	"info": {
+		"_postman_id": "c231a912-61e6-4413-8509-56dc207e48ae",
+		"name": "Home Website",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Blog",
+			"item": [
+				{
+					"name": "Create Blog Article",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\":\"3\",\n  \"header\":\"Should work bring joy?\",\n  \"text\":\"It is a tough philosophical question. Is it possible to be happy working on a job which you feel isn't yours? How to define that mythical so-called 'you'll-know-it's-your' job? Is hobby still joyful when you make it more routine...ish? Let's take a closer look, friends! How to distinguish between loss of passion and temporary fatigue?\",\n  \"img\":\"/img/blog/img-3-4000-(2000).jpg\",\n  \"date\":\"06 May, 2017\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{root}}{{en}}/article",
+							"host": [
+								"{{root}}{{en}}"
+							],
+							"path": [
+								"article"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Blog Article",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"1\",\n    \"header\": \"What caused my career change?\",\n    \"text\": \"Most people are told what to do and where to go, for example, by the loved ones. But even the closest people cannot fully understand our own way. Nobody can, but us. Therefore, it is our mission to find and persuade it.\\n\\nSo, this is how it happened with me. A few years ago I and my best friend studied programming. We had been doing it for a couple of years if I'm not mistaking, and the language was pure C++. It seemed pretty interesting to me as a process - you plan your idea, write it on your screen, the computer reads it and rewards you with the result. Oh, boy! The result seemed so sweet. It was totally worth the whole struggle. However, my problem was that I didn't see any purpose in front of me.\\n      \\n      \\nAs everything was becoming more and more difficult, I was losing my enthusiasm. And at that moment I still wasn't able to build even a basic applications (pure C++, remember?). Finally, I left it, but over time I noticed that I am still somehow attached to the coding. Thoughts about continuing studying the profession came back to me over and over again.\\n      \\nAll the other professions didn't have that much sense to me since then. It tried several of jobs which I thought I could like. Appetite comes with eating, you know. It surely did not work for me. I could not forget the feeling that you can create something from scratch. I felt the lack of creativity in each of these jobs which I had when I was programming. And I knew how useful this profession is.\\n      \\nSo, I obviously didn't leave myself a chance not to become a developer, so one evening after my another day on my OK-job, I decided to claim my life back. I decided to come back to IT-field as a web developer. Those lessons I learned with my friend helped me, even after several years without practice.\\n      \\nAfter several months of every day studying lessons and making projects I became able to get the fruits of my work. Currently, you can observe the result of it - my own website made from scratch. Will see what life is going to bring on the table, but I feel very positive having this results in a relatively short amount of time.\\n      \\nThank you so much for your time and attention! I promise to update this article or maybe other ones to keep you in touch with my career progress. See you!\",\n    \"img\": \"/img/blog/img-1-4000-(2000).jpg\",\n    \"date\": \"12 April, 2017\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{root}}{{en}}/article/5e275106ba3604366153cc22",
+							"host": [
+								"{{root}}{{en}}"
+							],
+							"path": [
+								"article",
+								"5e275106ba3604366153cc22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Blog Article",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{root}}{{en}}/article/5e276440cc5b5439889424c1",
+							"host": [
+								"{{root}}{{en}}"
+							],
+							"path": [
+								"article",
+								"5e276440cc5b5439889424c1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Blog Article",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{root}}{{en}}/article/5e275106ba3604366153cc22",
+							"host": [
+								"{{root}}{{en}}"
+							],
+							"path": [
+								"article",
+								"5e275106ba3604366153cc22"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Blog Articles List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{root}}{{en}}/article/list",
+							"host": [
+								"{{root}}{{en}}"
+							],
+							"path": [
+								"article",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "Create Project",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\":\"6\",\n  \"name\":\"Project 6\",\n  \"shortDescription\":\"Description of Project 6 will appear later.\",\n  \"longDescription\":\"Coming soon ... maybe ...\",\n  \"img\":\"/img/projects/p6-4000-(900).jpg\",\n  \"skills\":\"HTML, CSS, WordPress, AJAX, ES2017, React.js\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{root}}{{en}}/project",
+							"host": [
+								"{{root}}{{en}}"
+							],
+							"path": [
+								"project"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Project",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\":\"1\",\n  \"name\":\"Restaurant Website\",\n  \"shortDescription\":\"Informational site with blog and offers based on WordPress.\",\n  \"longDescription\":\"Informational site with blog and offers based on WordPress. Wordpress is picked for backend and client's convenience. Design and template itself are implemented from scratch.\",\n  \"img\":\"/img/projects/p1-4000-(900).jpg\",\n  \"skills\":\"HTML, CSS, jQuery, WordPress, AJAX\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{root}}{{en}}/project/5e2a0f5283860756c426410b",
+							"host": [
+								"{{root}}{{en}}"
+							],
+							"path": [
+								"project",
+								"5e2a0f5283860756c426410b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Project",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{root}}{{en}}/project/5e2a0f5283860756c426410b",
+							"host": [
+								"{{root}}{{en}}"
+							],
+							"path": [
+								"project",
+								"5e2a0f5283860756c426410b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Project",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{root}}{{en}}/project/5e2a0f5283860756c426410b",
+							"host": [
+								"{{root}}{{en}}"
+							],
+							"path": [
+								"project",
+								"5e2a0f5283860756c426410b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Projects List",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{root}}{{en}}/project/list",
+							"host": [
+								"{{root}}{{en}}"
+							],
+							"path": [
+								"project",
+								"list"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "User Registration",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"user@maill.com\",\n  \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{root}}{{en}}/users/register",
+							"host": [
+								"{{root}}{{en}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User Authentication",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"email\": \"user@maill.com\",\n  \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{root}}{{en}}/users/auth",
+							"host": [
+								"{{root}}{{en}}"
+							],
+							"path": [
+								"users",
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Token",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{root}}{{en}}/users/check-token",
+							"host": [
+								"{{root}}{{en}}"
+							],
+							"path": [
+								"users",
+								"check-token"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
