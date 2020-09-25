@@ -47,7 +47,7 @@ const createArticle = (req: Request, res: Response) => {
     return -1;
 };
 
-const udateArticle = async (req: Request, res: Response) => {
+const updateArticle = async (req: Request, res: Response) => {
     const body = req.body;
 
     if (!body) {
@@ -145,7 +145,7 @@ const getArticles = async (req: Request, res: Response) => {
 
 export {
     createArticle,
-    udateArticle,
+    updateArticle,
     deleteArticle,
     getArticleById,
     getArticles

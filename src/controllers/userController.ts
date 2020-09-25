@@ -33,7 +33,7 @@ const registerUser = (req: Request, res: Response) => {
     'User not created!');
 };
 
-const udateUser = async (req: Request, res: Response) => {
+const updateUser = async (req: Request, res: Response) => {
     const body = req.body;
 
     if (!body) {
@@ -174,5 +174,5 @@ export {
     getUsers,
     registerUser,
     secret,
-    udateUser
+    updateUser
 };

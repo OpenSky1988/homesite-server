@@ -46,7 +46,7 @@ const createSkill = (req: Request, res: Response) => {
     return -1;
 };
 
-const udateSkill = async (req: Request, res: Response) => {
+const updateSkill = async (req: Request, res: Response) => {
     const body = req.body;
 
     if (!body) {
@@ -143,8 +143,8 @@ const getSkills = async (req: Request, res: Response) => {
 
 export {
     createSkill,
-    udateSkill,
     deleteSkill,
     getSkillById,
-    getSkills
+    getSkills,
+    updateSkill,
 };

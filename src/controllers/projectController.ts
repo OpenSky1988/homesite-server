@@ -47,7 +47,7 @@ const createProject = (req: Request, res: Response) => {
     return -1;
 };
 
-const udateProject = async (req: Request, res: Response) => {
+const updateProject = async (req: Request, res: Response) => {
     const body = req.body;
 
     if (!body) {
@@ -146,8 +146,8 @@ const getProjects = async (_req: Request, res: Response) => {
 
 export {
     createProject,
-    udateProject,
     deleteProject,
     getProjectById,
-    getProjects
+    getProjects,
+    updateProject,
 };

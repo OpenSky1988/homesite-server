@@ -47,7 +47,7 @@ const createTextBlock = (req: Request, res: Response) => {
     return -1;
 };
 
-const udateTextBlock = async (req: Request, res: Response) => {
+const updateTextBlock = async (req: Request, res: Response) => {
     const body = req.body;
 
     if (!body) {
@@ -141,8 +141,8 @@ const getTextBlockById = async (req: Request, res: Response) => {
 
 export {
     createTextBlock,
-    udateTextBlock,
     deleteTextBlock,
     getTextBlockById,
-    // getTextBlocks
+    // getTextBlocks,
+    updateTextBlock,
 };
