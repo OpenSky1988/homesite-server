@@ -1,5 +1,4 @@
-import { Document, Schema } from 'mongoose';
-import mongoose from 'mongoose';
+import mongoose, { Document, Schema } from 'mongoose';
 import bcrypt from 'bcrypt';
 
 interface IUser {
