@@ -11,9 +11,9 @@ import withAuth from '../middleware/index';
 const projectRouter = express.Router();
 
 projectRouter.post('/', withAuth, createProject);
-projectRouter.get('/list', withAuth, getProjects);
+projectRouter.get('/list', getProjects);
 projectRouter.put('/:id', withAuth, updateProject);
 projectRouter.delete('/:id', withAuth, deleteProject);
-projectRouter.get('/:id', withAuth, getProjectById);
+projectRouter.get('/:id', getProjectById);
 
 export default projectRouter;

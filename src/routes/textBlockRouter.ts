@@ -11,9 +11,9 @@ import withAuth from '../middleware/index';
 const textBlockRouter = express.Router();
 
 textBlockRouter.post('/', withAuth, createTextBlock);
-// textBlockRouter.get('/list', withAuth, getTextBlocks);
+// textBlockRouter.get('/list', getTextBlocks);
 textBlockRouter.put('/:id', withAuth, updateTextBlock);
 textBlockRouter.delete('/:id', withAuth, deleteTextBlock);
-textBlockRouter.get('/:id', withAuth, getTextBlockById);
+textBlockRouter.get('/:id', getTextBlockById);
 
 export default textBlockRouter;
