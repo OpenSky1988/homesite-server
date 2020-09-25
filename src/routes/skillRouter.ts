@@ -11,9 +11,9 @@ import withAuth from '../middleware/index';
 const skillRouter = express.Router();
 
 skillRouter.post('/', withAuth, createSkill);
-skillRouter.get('/list', withAuth, getSkills);
+skillRouter.get('/list', getSkills);
 skillRouter.put('/:id', withAuth, updateSkill);
 skillRouter.delete('/:id', withAuth, deleteSkill);
-skillRouter.get('/:id', withAuth, getSkillById);
+skillRouter.get('/:id', getSkillById);
 
 export default skillRouter;
