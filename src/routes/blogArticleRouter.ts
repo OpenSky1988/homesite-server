@@ -11,9 +11,9 @@ import withAuth from '../middleware/index';
 const blogArticleRouter = express.Router();
 
 blogArticleRouter.post('/', withAuth, createArticle);
-blogArticleRouter.get('/list', withAuth, getArticles);
+blogArticleRouter.get('/list', getArticles);
 blogArticleRouter.put('/:id', withAuth, updateArticle);
 blogArticleRouter.delete('/:id', withAuth, deleteArticle);
-blogArticleRouter.get('/:id', withAuth, getArticleById);
+blogArticleRouter.get('/:id', getArticleById);
 
 export default blogArticleRouter;
