@@ -1,12 +1,19 @@
 import express from 'express';
-import * as skillController from '../controllers/skillController';
+import {
+    createSkill,
+    deleteSkill,
+    getSkillById,
+    getSkills,
+    updateSkill,
+} from '../controllers/skillController';
+import withAuth from '../middleware/index';
 
 const skillRouter = express.Router();
 
-skillRouter.post('/', skillController.createSkill);
-skillRouter.get('/list', skillController.getSkills);
-skillRouter.put('/:id', skillController.udateSkill);
-skillRouter.delete('/:id', skillController.deleteSkill);
-skillRouter.get('/:id', skillController.getSkillById);
+skillRouter.post('/', withAuth, createSkill);
+skillRouter.get('/list', withAuth, getSkills);
+skillRouter.put('/:id', withAuth, updateSkill);
+skillRouter.delete('/:id', withAuth, deleteSkill);
+skillRouter.get('/:id', withAuth, getSkillById);
 
 export default skillRouter;
