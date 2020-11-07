@@ -107,7 +107,7 @@ const deleteTextBlock = async (req: Request, res: Response) => {
             return res.status(400).json({ success: false, error: 'Text block not found.' });
         }
 
-        return res.status(200).json({ success: true, data: textblock });
+        return res.status(200).json({ success: true, payload: textblock });
     }).catch((error: Error) => console.log(`Unable to delete textblock. Error: ${stringifyObject(error)}`));
 };
 
@@ -121,7 +121,7 @@ const getTextBlockById = async (req: Request, res: Response) => {
             return res.status(400).json({ success: false, error: 'Text block not found.' });
         }
 
-        return res.status(200).json({ success: true, data: textblock });
+        return res.status(200).json({ success: true, payload: textblock });
     }).catch((error: Error) => console.log(`Unable to fetch text block. Error: ${stringifyObject(error)}`));
 };
 
@@ -135,7 +135,7 @@ const getTextBlockById = async (req: Request, res: Response) => {
 //             return res.status(400).json({ success: false, error: 'Text blocks not found.' });
 //         }
 
-//         return res.status(200).json({ success: true, data: textBlocks });
+//         return res.status(200).json({ success: true, payload: textBlocks });
 //     }).catch((error: Error) => console.log(`Unable to fetch text blocks. Error: ${stringifyObject(error)}`));
 // };
 
