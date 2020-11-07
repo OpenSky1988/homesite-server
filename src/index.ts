@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
+import colors from 'colors/safe';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 require('dotenv').config();
@@ -39,4 +40,4 @@ app.use(`${apiConfig.apiRoot}${apiConfig.locale.en}/skill`, skillRouter);
 app.use(`${apiConfig.apiRoot}${apiConfig.locale.en}/year`, textBlockRouter);
 app.use(`${apiConfig.apiRoot}${apiConfig.locale.en}/users`, userRouter);
 
-app.listen(apiConfig.apiPort, () => console.log(`Server running on port ${apiConfig.apiPort}`));
+app.listen(apiConfig.apiPort, () => console.log(`\n${colors.green('Server running on port')} ${apiConfig.apiPort}`));

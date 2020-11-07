@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import stringifyObject from '../helpers/stringifyObject';
 import { ArticleType, IArticle } from '../models/blogArticleModel';
 import articleModel from '../models/blogArticleModel';
+import { Document } from 'mongoose';
 
 type ArticleSchemaType = IArticle & { save(): any; };
 
@@ -102,7 +103,7 @@ const updateArticle = async (req: Request, res: Response) => {
 };
 
 const deleteArticle = async (req: Request, res: Response) => {
-    await articleModel.findOneAndDelete({ _id: req.params.id }, (error: Error, article: ArticleType) => {
+    await articleModel.findOneAndDelete({ _id: req.params.id }, (error: Error, article: Document & ArticleType) => {
         if (error) {
             return res.status(400).json({ success: false, error: error });
         }
@@ -111,12 +112,12 @@ const deleteArticle = async (req: Request, res: Response) => {
             return res.status(400).json({ success: false, error: 'Article not found.' });
         }
 
-        return res.status(200).json({ success: true, data: article });
+        return res.status(200).json({ success: true, payload: article });
     }).catch((error: Error) => console.log(`Unable to delete article. Error: ${stringifyObject(error)}`));
 };
 
 const getArticleById = async (req: Request, res: Response) => {
-    await articleModel.findOne({ _id: req.params.id }, (error: Error, article: IArticle) => {
+    await articleModel.findOne({ _id: req.params.id }, async (error: Error, article: Document & IArticle) => {
         if (error) {
             return res.status(400).json({ success: false, error: error });
         }
@@ -125,7 +126,22 @@ const getArticleById = async (req: Request, res: Response) => {
             return res.status(400).json({ success: false, error: 'Article not found.' });
         }
 
-        return res.status(200).json({ success: true, data: article });
+        const prev = await articleModel
+            .find({_id: {$lt: req.params.id}})
+            .sort({_id: -1 })
+            .limit(1);
+        const next = await articleModel
+            .find({_id: {$gt: req.params.id}})
+            .sort({_id: 1 })
+            .limit(1);
+
+        return res.status(200).json({ success: true, payload: {
+            ...article.toObject(),
+            navigation: {
+                prevId: prev.length ? prev[0]._id : null,
+                nextId: next.length ? next[0]._id : null,
+            }
+        }});
     }).catch((error: Error) => console.log(`Unable to fetch article. Error: ${stringifyObject(error)}`));
 };
 
@@ -139,7 +155,7 @@ const getArticles = async (req: Request, res: Response) => {
             return res.status(400).json({ success: false, error: 'Articles not found.' });
         }
 
-        return res.status(200).json({ success: true, data: articles });
+        return res.status(200).json({ success: true, payload: articles });
     }).catch((error: Error) => console.log(`Unable to fetch articles. Error: ${stringifyObject(error)}`));
 };
 

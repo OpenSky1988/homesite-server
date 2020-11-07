@@ -84,7 +84,7 @@ const deleteUser = async (req: Request, res: Response) => {
             return res.status(400).json({ success: false, error: 'User not found.' });
         }
 
-        return res.status(200).json({ success: true, data: user });
+        return res.status(200).json({ success: true, payload: user });
     }).catch((error: Error) => console.log(`Unable to delete user. Error: ${stringifyObject(error)}`));
 };
 
@@ -98,7 +98,7 @@ const getUserById = async (req: Request, res: Response) => {
             return respondWithError(res, 'User not found.');
         }
 
-        return res.status(200).json({ success: true, data: user });
+        return res.status(200).json({ success: true, payload: user });
     }).catch((error: Error) => console.log(`Unable to fetch user. Error: ${stringifyObject(error)}`));
 };
 
@@ -112,14 +112,14 @@ const getUsers = async (_req: Request, res: Response) => {
             return respondWithError(res, 'Users not found.');
         }
 
-        return res.status(200).json({ success: true, data: users });
+        return res.status(200).json({ success: true, payload: users });
     }).catch((error: Error) => console.log(`Unable to fetch users. Error: ${stringifyObject(error)}`));
 };
 
 const authenticateUser = (req: Request, res: Response) => {
     const { email, password } = req.body;
     
-    userModel.findOne({ email }, function(error: Error, user) {
+    userModel.findOne({ email }, function (error: Error, user) {
         if (error) {
             console.error(error);
             res.status(500)
@@ -132,7 +132,7 @@ const authenticateUser = (req: Request, res: Response) => {
                     error: 'Incorrect email or password'
                 });
         } else {
-            user.isCorrectPassword(password, function(error: Error, same: Boolean) {
+            user.isCorrectPassword(password, function (error: Error, same: Boolean) {
                 if (error) {
                     res.status(500).json({
                         error: 'Internal error please try again'
