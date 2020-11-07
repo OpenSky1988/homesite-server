@@ -112,7 +112,7 @@ const deleteProject = async (req: Request, res: Response) => {
             return res.status(400).json({ success: false, error: 'Project not found.' });
         }
 
-        return res.status(200).json({ success: true, data: project });
+        return res.status(200).json({ success: true, payload: project });
     }).catch((error: Error) => console.log(`Unable to delete project. Error: ${stringifyObject(error)}`));
 };
 
@@ -126,7 +126,7 @@ const getProjectById = async (req: Request, res: Response) => {
             return res.status(400).json({ success: false, error: 'Project not found.' });
         }
 
-        return res.status(200).json({ success: true, data: project });
+        return res.status(200).json({ success: true, payload: project });
     }).catch((error: Error) => console.log(`Unable to fetch project. Error: ${stringifyObject(error)}`));
 };
 
@@ -140,7 +140,7 @@ const getProjects = async (_req: Request, res: Response) => {
             return res.status(400).json({ success: false, error: 'Projects not found.' });
         }
 
-        return res.status(200).json({ success: true, data: projects });
+        return res.status(200).json({ success: true, payload: projects });
     }).catch((error: Error) => console.log(`Unable to fetch projects. Error: ${stringifyObject(error)}`));
 };
 

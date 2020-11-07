@@ -1,3 +1,4 @@
+import colors from 'colors/safe';
 import mongoose from 'mongoose';
 
 const mongoURI = 'mongodb://127.0.0.1:27017/alexp';
@@ -5,7 +6,15 @@ const mongoURI = 'mongodb://127.0.0.1:27017/alexp';
 mongoose
   .connect(mongoURI, { useNewUrlParser: true })
     .catch((error: Error) => {
-      console.error('Connection error', error.message);
+      const separator = '────────────────────────────────────────────────────────';
+      console.log('\n' + colors.yellow(separator));
+      console.log(colors.red('CONNECTION ERROR'));
+      console.log(colors.yellow(separator));
+      console.log(`${colors.green('Error name:')} ${error.name}`);
+      console.log(`${colors.green('Error message:')} ${error.message}`);
+      console.log(separator);
+      console.log(`${colors.green('Error stack:')} ${error.stack}`);
+      console.log(colors.yellow(separator));
     });
 
 const MongoDB = mongoose.connection;

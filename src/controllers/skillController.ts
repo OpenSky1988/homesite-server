@@ -109,7 +109,7 @@ const deleteSkill = async (req: Request, res: Response) => {
             return res.status(400).json({ success: false, error: 'Skill not found.' });
         }
 
-        return res.status(200).json({ success: true, data: skill });
+        return res.status(200).json({ success: true, payload: skill });
     }).catch((error: Error) => console.log(`Unable to delete skill. Error: ${stringifyObject(error)}`));
 };
 
@@ -123,7 +123,7 @@ const getSkillById = async (req: Request, res: Response) => {
             return res.status(400).json({ success: false, error: 'Skill not found.' });
         }
 
-        return res.status(200).json({ success: true, data: skill });
+        return res.status(200).json({ success: true, payload: skill });
     }).catch((error: Error) => console.log(`Unable to fetch skill. Error: ${stringifyObject(error)}`));
 };
 
@@ -137,7 +137,7 @@ const getSkills = async (req: Request, res: Response) => {
             return res.status(400).json({ success: false, error: 'Skills not found.' });
         }
 
-        return res.status(200).json({ success: true, data: skills });
+        return res.status(200).json({ success: true, payload: skills });
     }).catch((error: Error) => console.log(`Unable to fetch skills. Error: ${stringifyObject(error)}`));
 };
 
