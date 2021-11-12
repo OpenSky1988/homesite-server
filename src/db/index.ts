@@ -3,12 +3,8 @@ import mongoose from 'mongoose';
 
 const mongoURI = 'mongodb://127.0.0.1:27017/alexp';
 
-mongoose.set('useCreateIndex', true);
 mongoose
-  .connect(mongoURI, {
-    useNewUrlParser: true,
-    useCreateIndex: true,
-  })
+  .connect(mongoURI)
   .catch((error: Error) => {
     const separator = '────────────────────────────────────────────────────────';
     console.log('\n' + colors.yellow(separator));
