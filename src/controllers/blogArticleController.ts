@@ -1,8 +1,8 @@
 import { Request, Response } from 'express';
+import { Document } from 'mongoose';
 import stringifyObject from '../helpers/stringifyObject';
 import { ArticleType, IArticle } from '../models/blogArticleModel';
 import articleModel from '../models/blogArticleModel';
-import { Document } from 'mongoose';
 
 type ArticleSchemaType = IArticle & { save(): any; };
 
