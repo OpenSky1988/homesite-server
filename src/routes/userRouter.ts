@@ -1,12 +1,12 @@
 import express from 'express';
 import {
-    authenticateUser,
-    checkToken,
-    deleteUser,
-    getUserById,
-    getUsers,
-    registerUser,
-    updateUser,
+  authenticateUser,
+  checkToken,
+  deleteUser,
+  getUserById,
+  getUsers,
+  registerUser,
+  updateUser,
 } from '../controllers/userController';
 import withAuth from '../middleware/index';
 
