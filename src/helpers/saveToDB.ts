@@ -1,4 +1,5 @@
-import { Document, Response } from 'mongodb';
+import { Document } from 'mongodb';
+import { Response } from 'express';
 import stringifyObject from '../helpers/stringifyObject';
 
 type DBSaveResponseBody = {
